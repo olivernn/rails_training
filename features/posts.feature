@@ -29,5 +29,19 @@ Feature: Manage Posts
     When I am on the homepage
     Then I should see "foo" 
     And I should see "hello"
-    And I should see "bar"
-    And I should see "world"
+    And I should not see "bar"
+    And I should not see "world"
+
+   @wip
+   Scenario: As a blogger I want people to be able to read my posts
+     Given I have the following posts
+       | title | body  |
+       | foo   | bar   |
+       | hello | world |
+     When I am on the homepage
+     And I follow "foo"
+     Then I should see "foo"
+     And I should see "bar"
+     And I should not see "hello"
+     And I should not see "world"
+     
