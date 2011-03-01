@@ -1,6 +1,9 @@
 class PostsController < ApplicationController
+
+  respond_to :html
+
   def index
-    
+    @posts = Post.all
   end
 
   def show
@@ -12,9 +15,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(params[:post])
-    @post.save
-
-    redirect_to @post
+    @post = Post.create(params[:post])
+    respond_with @post
   end
 end
