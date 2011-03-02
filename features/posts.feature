@@ -32,7 +32,6 @@ Feature: Manage Posts
     And I should not see "bar"
     And I should not see "world"
 
-   @wip
    Scenario: As a blogger I want people to be able to read my posts
      Given I have the following posts
        | title | body  |
@@ -44,4 +43,34 @@ Feature: Manage Posts
      And I should see "bar"
      And I should not see "hello"
      And I should not see "world"
-     
+
+  Scenario: Commenting on a post
+    Given I have the following posts
+      | title | body  |
+      | foo   | bar   |
+    And I am on the homepage
+    When I follow "foo"
+    And I fill in "Name" with "Bob"
+    And I fill in "Message" with "Great post!"
+    And I press "Add Comment"
+    Then I should have "1" Comment
+    And I should see "Bob"
+    And I should see "Great post"
+    And I should see "1 Comment"
+    When I fill in "Name" with "Jack"
+    And I fill in "Message" with "Noob!"
+    And I press "Add Comment"
+    Then I should have "2" Comments
+    And I should see "2 Comments"
+
+  Scenario: Editing a post
+    Given I have the following post
+     | title | body  |
+     | foo   | bar   |
+    When I am on the homepage 
+    And I follow "Edit"
+    And I fill in "Body" with "bar bar"
+    And I press "Save"
+    Then I should be on the show page for the post foo
+    And I should see "bar bar"
+    And I should see "foo"

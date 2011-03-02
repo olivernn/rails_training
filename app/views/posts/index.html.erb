@@ -3,7 +3,8 @@
 <ul>
   <% @posts.each do |post| %>
     <li>
-      <h2><%= link_to post.title, post %></h2> 
+      <h2><%= link_to post.title, post %></h2>
+      <p> <%= link_to "Edit", edit_post_path(post) %></p> 
     </li>
   <% end %>
 </ul>
