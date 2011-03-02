@@ -3,6 +3,9 @@ Blog::Application.routes.draw do
   resources :posts do
     resources :comments
   end
+
+  resources :draft_posts
+
   root :to => "posts#index"
   
 

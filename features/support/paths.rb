@@ -14,6 +14,9 @@ module NavigationHelpers
     when /^the show page for the post (.*)$/i
       post_path Post.find_by_title($1)
 
+    when /^the draft posts page$/
+      draft_posts_path
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

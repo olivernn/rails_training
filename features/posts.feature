@@ -23,9 +23,9 @@ Feature: Manage Posts
 
   Scenario: As a blogger I want to see all the blogs I have posted
     Given I have the following posts
-      | title | body  |
-      | foo   | bar   |
-      | hello | world |
+    | title | body  | published |
+    | foo   | bar   | true      |
+    | hello | world | true      |
     When I am on the homepage
     Then I should see "foo" 
     And I should see "hello"
@@ -34,9 +34,9 @@ Feature: Manage Posts
 
    Scenario: As a blogger I want people to be able to read my posts
      Given I have the following posts
-       | title | body  |
-       | foo   | bar   |
-       | hello | world |
+       | title | body  | published |
+       | foo   | bar   | true      |
+       | hello | world | true      |
      When I am on the homepage
      And I follow "foo"
      Then I should see "foo"
@@ -46,8 +46,8 @@ Feature: Manage Posts
 
   Scenario: Commenting on a post
     Given I have the following posts
-      | title | body  |
-      | foo   | bar   |
+    | title | body  | published |
+    | foo   | bar   | true      |
     And I am on the homepage
     When I follow "foo"
     And I fill in "Name" with "Bob"
@@ -65,8 +65,8 @@ Feature: Manage Posts
 
   Scenario: Editing a post
     Given I have the following post
-     | title | body  |
-     | foo   | bar   |
+    | title | body  | published |
+    | foo   | bar   | true      |
     When I am on the homepage 
     And I follow "Edit"
     And I fill in "Body" with "bar bar"
@@ -74,3 +74,21 @@ Feature: Manage Posts
     Then I should be on the show page for the post foo
     And I should see "bar bar"
     And I should see "foo"
+
+  @wip
+  Scenario: Publishing a draft blog post
+    Given I have the following post
+     | title | body  | published |
+     | foo   | bar   | false     |
+    And I am on the homepage
+    Then I should not see "foo"
+    When I am on the draft posts page
+    Then I should see "foo"
+    # When I follow "Edit"
+    # And I check "Published"
+    # And I press "Save"
+    # And I go to the homepage
+    # Then I should see "foo"
+  
+  
+  

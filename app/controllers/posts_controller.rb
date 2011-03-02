@@ -3,8 +3,7 @@ class PostsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @posts = Post.all
-  
+    @posts = Post.published
   end
 
   def show
